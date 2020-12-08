@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue demo</title>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
+  <script src="./vue.js"></script>
+</head>
+<body>
+  <div id="app">{{ message }}</div>
+  <div id="app2">
+    <span v-bind:title="title">鼠标悬停几秒钟查看此处动态绑定的信息提示！</span>
+    <p>{{ message }}</p>
+    <button v-on:click="reverseMessage">反转消息</button>
+
+    <p>{{ inputValue }}</p>
+    <input v-model="inputValue">
+  </div>
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        message: 'hello world!'
+      }
+    })
+    // 1. 在控制台修改window.vm.message = 'aaa'; 页面的内容也会相应改为aaa,这表示数据和DOM建立了关联，所有东西都是响应式的。
+
+    var app2 = new Vue({
+      el: '#app2',
+      data: {
+        title: '页面加载于：' + new Date().toLocaleString(),
+        message: 'Hello Vue.js!',
+        inputValue: 'xiaoshuai'
+      },
+      methods: {
+        reverseMessage() {
+          this.message = this.message.split('').reverse().join('');
+        }
+      }
+    })
+  </script>
+</body>
+</html>
